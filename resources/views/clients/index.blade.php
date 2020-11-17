@@ -35,15 +35,8 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <a href="javascript:void(0);" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Client</a>
+                            <a href="{{route('clients.ajout')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Client</a>
                         </div>
-                        <div class="col-sm-8">
-                            <div class="text-sm-right">
-                                <button type="button" class="btn btn-success mb-2 mr-1"><i class="mdi mdi-cog"></i></button>
-                                <button type="button" class="btn btn-light mb-2 mr-1">Import</button>
-                                <button type="button" class="btn btn-light mb-2">Export</button>
-                            </div>
-                        </div><!-- end col-->
                     </div>
 
                     <div class="table-responsive">
@@ -65,102 +58,36 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Select</label>
-                                    </div>
-                                </td>
-                                <td class="table-user">
-                                    <img src="https://media.shemsfm.net/uploads/content/big/1585677670_content.jpg" alt="table-user" class="mr-2">
-                                    <a href="javascript:void(0);" class="text-body font-weight-semibold">Delice Corp</a>
-                                </td>
-                                <td> Mars 05 2019</td>
-                                <td>26 897 423</td>
-                                <td>
-                                    August 05 2010
-                                </td>
-                                <td>
-                                    <span class="badge badge-soft-success">Active</span>
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Select</label>
-                                    </div>
-                                </td>
-                                <td class="table-user">
-                                    <img src="https://media.shemsfm.net/uploads/content/big/1585677670_content.jpg" alt="table-user" class="mr-2">
-                                    <a href="javascript:void(0);" class="text-body font-weight-semibold">Carrefour</a>
-                                </td>
-                                <td> October 16 2018</td>
-                                <td>58 689 897</td>
-                                <td>
-                                    August 05 2015
-                                </td>
-                                <td>
-                                    <span class="badge badge-soft-warning">Not Renewed</span>
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Select</label>
-                                    </div>
-                                </td>
-                                <td class="table-user">
-                                    <img src="https://media.shemsfm.net/uploads/content/big/1585677670_content.jpg" alt="table-user" class="mr-2">
-                                    <a href="javascript:void(0);" class="text-body font-weight-semibold">Peaudouce</a>
-                                </td>
-                                <td> April 22 2020</td>
-                                <td>26 289 411</td>
-                                <td>
-                                    April 22 2020
-                                </td>
-                                <td>
-                                    <span class="badge badge-soft-success">Active</span>
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Select</label>
-                                    </div>
-                                </td>
-                                <td class="table-user">
-                                    <img src="https://media.shemsfm.net/uploads/content/big/1585677670_content.jpg" alt="table-user" class="mr-2">
-                                    <a href="javascript:void(0);" class="text-body font-weight-semibold">Inovatis</a>
-                                </td>
-                                <td>January 05 2019</td>
-                                <td>26 897 423</td>
-                                <td>
-                                    January 05 2017
-                                </td>
-                                <td>
-                                    <span class="badge badge-soft-danger">Stopped</span>
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
+                            @foreach($clients as $client)
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                            <label class="custom-control-label" for="customCheck2">Select</label>
+                                        </div>
+                                    </td>
+                                    <td class="table-user">
+                                        <img style="max-width: 70px" src="{{asset('assets/images/users/'.$client->avatar)}}" alt="table-user" class="mr-2">
+                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">{{$client->nom}}</a>
+                                    </td>
+                                    <td> Mars 05 2019</td>
+                                    <td>{{$client->telephone}}</td>
+                                    <td>
+                                        {{date('F m Y',strtotime($client->created_at))}}
+                                    </td>
+                                    <td>
+                                        @if($client->etat == 'Prospect')
+                                            <span class="badge badge-soft-success">Prospect</span>
+                                        @else
+                                            <span class="badge badge-success">Client</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{route('clients.edit',$client->id)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                        <a href="#" onclick="displayDeleteModal('{{$client->id}}','{{$client->nom}}')" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -168,30 +95,36 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
 
+    <div id="top-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-top">
             <div class="modal-content">
-                <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete Client Confirmation</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="topModalLabel">Delete Employe Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
+                <div id="top-modal-body" class="modal-body">
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    Are you sure you want to delete Client "Innovatis"
                 </div>
-                <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+                    <form method="POST" id="top-modal-form" action="">
+                        @csrf @method('delete')
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </div>
-
-            </div>
-        </div>
-    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
-@section('js')@endsection
+@section('js')
+    <script>
+        function displayDeleteModal(id,name) {
+            $('#top-modal-body').html('Are you sure to delete client : " '+name+' "');
+            $('#top-modal-form').attr('action','{{route('clients.destroy')}}/'+id);
+            $('#top-modal').modal('show');
+        }
+    </script>
+
+@endsection
 

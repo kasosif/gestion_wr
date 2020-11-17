@@ -75,7 +75,6 @@
                                     <td>{{$employe->telephone}}</td>
                                     <td>
                                         {{date('F m Y',strtotime($employe->date_embauche))}}
-                                        January 05 2015
                                     </td>
                                     <td>
                                         @if($employe->is_valid)

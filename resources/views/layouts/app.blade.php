@@ -141,7 +141,7 @@
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="index.html" class="logo logo-dark text-center">
+                <a href="{{route('home')}}" class="logo logo-dark text-center">
                             <span class="logo-sm">
                                 <img src="{{asset('assets/images/logo-sm.png') }}" alt="" height="22">
                                 <!-- <span class="logo-lg-text-light">UBold</span> -->
@@ -152,7 +152,7 @@
                             </span>
                 </a>
 
-                <a href="index.html" class="logo logo-light text-center">
+                <a href="{{route('home')}}" class="logo logo-light text-center">
                             <span class="logo-sm">
                                 <img src="{{asset('assets/images/logo-sm.png') }}" alt="" height="22">
                             </span>
@@ -206,7 +206,7 @@
                             <span>My Account</span>
                         </a>
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item notify-item">
                             <i class="fe-log-out mr-1"></i>
                             <span>Logout</span>
                         </a>
@@ -224,13 +224,12 @@
                     <li class="menu-title">Navigation</li>
 
                     <li>
-                        <a href="#" data-toggle="collapse"  @yield('active_dashboard') >
+                        <a href="{{route('home')}}" data-toggle="collapse"  @yield('active_dashboard') >
                             <i data-feather="airplay"></i>
                             <span> Dashboard </span>
                         </a>
                     </li>
                     @if(Auth::user()->role == 'admin')
-
                         <li>
                             <a href="#sidebarCRM" data-toggle="collapse" @yield('active_employees_link')>
                                 <i data-feather="users"></i>
@@ -257,8 +256,8 @@
                         <div class="collapse @yield('show_clients_coolapse') " id="sidebarClient">
                             <ul class="nav-second-level">
                                 <li>
-                                    <a @yield('active_clients_list')href="#">Clients List</a>
-                                    <a @yield('active_clients_add')href="#">New Client</a>
+                                    <a @yield('active_clients_list')href="{{route('clients.index')}}">Clients List</a>
+                                    <a @yield('active_clients_add')href="{{route('clients.ajout')}}">New Client</a>
                                 </li>
                             </ul>
                         </div>

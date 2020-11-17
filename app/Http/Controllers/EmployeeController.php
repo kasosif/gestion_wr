@@ -75,7 +75,7 @@ class EmployeeController extends Controller
         $params = [];
         if ($image = $request->files->get('avatar')) {
             $destinationPath = 'assets/images/users/'; // upload path
-            if ($employe->image && file_exists(public_path().'/assets/images/users/'.$employe->avatar)) {
+            if ($employe->avatar && file_exists(public_path().'/assets/images/users/'.$employe->avatar)) {
                 unlink(public_path().'/assets/images/users/'.$employe->avatar);
             }
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -98,7 +98,7 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         $employe = User::find($id);
-        if ($employe->image && file_exists(public_path().'/assets/images/users/'.$employe->avatar)) {
+        if ($employe->avatar && file_exists(public_path().'/assets/images/users/'.$employe->avatar)) {
             unlink(public_path().'/assets/images/users/'.$employe->avatar);
         }
         $employe->delete();

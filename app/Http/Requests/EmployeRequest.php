@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class EmployeRequest extends FormRequest
@@ -15,7 +16,7 @@ class EmployeRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->role == 'admin';
     }
 
     /**
@@ -29,7 +30,7 @@ class EmployeRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'avatar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2200|min:5',
+                    'avatar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2200',
                     'telephone' => ['required','numeric','digits:8','regex:/^0*(?:[1-9]|[1-9]\d\d*)$/'],
                     'nom' => 'required|min:2',
                     'prenom' => 'required|min:2',
@@ -43,7 +44,7 @@ class EmployeRequest extends FormRequest
             {
                 $user = User::find($this->route('id'));
                 return [
-                    'avatar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2200|min:5',
+                    'avatar.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2200',
                     'telephone' => ['required','numeric','digits:8','regex:/^0*(?:[1-9]|[1-9]\d\d*)$/'],
                     'nom' => 'required|min:2',
                     'prenom' => 'required|min:2',
