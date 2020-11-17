@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('prenom');
             $table->string('telephone');
             $table->string('poste');
+            $table->boolean('is_valid')->default(true);
             $table->text('adresse');
             $table->date('date_embauche');
             $table->string('role');

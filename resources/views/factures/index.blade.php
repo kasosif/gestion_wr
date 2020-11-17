@@ -92,7 +92,7 @@
         function displayDeleteModal(id) {
             $('#top-modal-body').html('Are you sure to delete invoice with id : '+id);
             $('#top-modal-form').attr('action','{{url('/facture/destroy/')}}/'+id);
-$('#top-modal').modal('show');
+            $('#top-modal').modal('show');
         }
     </script>
 @endsection

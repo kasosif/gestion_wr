@@ -15,12 +15,12 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/employes', 'EmployeController@index')->name('employe.index');
-    Route::get('/employes/ajout', 'EmployeController@create')->name('employe.ajout');
-    Route::post('/employes/store', 'EmployeController@store')->name('employe.store');
-    Route::delete('/employes/destroy/{cin?}', 'EmployeController@destroy')->name('employe.destroy');
-    Route::get('/employes/edit/{cin}', 'EmployeController@edit')->name('employe.edit');
-    Route::put('/employes/update/{cin}', 'EmployeController@update')->name('employe.update');
+    Route::get('/employes', 'EmployeeController@index')->name('employe.index');
+    Route::get('/employes/ajout', 'EmployeeController@create')->name('employe.ajout');
+    Route::post('/employes/store', 'EmployeeController@store')->name('employe.store');
+    Route::delete('/employes/destroy/{id?}', 'EmployeeController@destroy')->name('employe.destroy');
+    Route::get('/employes/edit/{id}', 'EmployeeController@edit')->name('employe.edit');
+    Route::put('/employes/update/{id}', 'EmployeeController@update')->name('employe.update');
 
     Route::get('/factures', 'FactureController@index')->name('factures.index');
     Route::get('/facture/ajout', 'FactureController@create')->name('facture.create');
