@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
 	protected $guarded = [];
-
-	public function factures () {
+ 	public function factures () {
 		return $this->hasMany('App\Facture');
 	}
 

@@ -42,4 +42,7 @@ class User extends Authenticatable
     public function humanRole() {
         return $this->role == 'admin' ? 'Administrator' : $this->poste;
     }
+    public function fullName(){
+        return $this->nom .' '.$this->prenom;
+}
 }

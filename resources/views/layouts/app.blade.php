@@ -193,11 +193,11 @@
 
                     <!-- User box -->
                     <div class="user-box text-center d-block">
-                        <img src="{{asset('assets/images/users/user-1.jpg')}}" alt="user-img" title="Mat Helme"
+                        <img src="{{asset('assets/images/users/'.Auth::user()->avatar)}}" alt="user-img" title="Mat Helme"
                             class="rounded-circle avatar-md">
                         <div class="dropdown">
                             <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
-                                data-toggle="dropdown">Yasmine Ayari</a>
+                                data-toggle="dropdown">{{Auth::user()->fullName()}}</a>
                             <div class="dropdown-menu user-pro-dropdown">
 
                                 <!-- item-->
@@ -273,8 +273,8 @@
                                 <div class="collapse @yield('show_invoices_coolapse')" id="sidebarInvoice">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a @yield('active_invoices_list') href="#">Invoices List</a>
-                                            <a @yield('active_invoices_add') href="#">New Invoice</a>
+                                            <a @yield('active_invoices_list') href="{{route('factures.index')}}">Invoices List</a>
+                                            <a @yield('active_invoices_add') href="{{route('facture.create')}}">New Invoice</a>
                                         </li>
                                     </ul>
                                 </div>
