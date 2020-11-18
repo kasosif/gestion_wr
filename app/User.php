@@ -36,7 +36,7 @@ class User extends Authenticatable
     ];
 
     public function contrats () {
-        return $this->hasMany ("App\User");
+        return $this->hasMany("App\User");
     }
 
     public function humanRole() {
@@ -44,5 +44,8 @@ class User extends Authenticatable
     }
     public function fullName(){
         return $this->nom .' '.$this->prenom;
-}
+    }
+    public function factures() {
+        return $this->hasMany('App\Factures','user_id');
+    }
 }

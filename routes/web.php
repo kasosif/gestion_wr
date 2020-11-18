@@ -44,4 +44,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/contrat/destroy/{id}', 'ContratController@destroy')->name('contrat.destroy');
     Route::get('/contrat/edit/{id}', 'ContratController@edit')->name('contrat.edit');
     Route::put('/contrat/update/{id}', 'ContratController@update')->name('contrat.update');
+
+    Route::get('/ajax/contracts/{client_id?}','AjaxController@contracts')->name('ajax.contracts');
+
 });

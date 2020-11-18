@@ -19,4 +19,9 @@ class Contrat extends Model
 	public function typeService() {
 		return $this->belongsTo('App\TypeService');
 	}
+
+
+	public function factures() {
+        return $this->hasMany('App\Facture');
+    }
 }
