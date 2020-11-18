@@ -30,6 +30,7 @@
     </div>
 @endsection
 @section('content')
+    @php($subtotal = 0)
     <div class="row">
         <div class="col-12">
             <div class="card-box">
@@ -51,48 +52,32 @@
                         </div>
                     </div>
                     <div class="float-right">
-                        <h4 class="m-0 d-print-none">Invoice #14575 (Inovatis)</h4>
+                        <h4 class="m-0 d-print-none">Invoice #{{$facture->reference}} ({{$facture->client->nom}})</h4>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mt-3">
-                            <p><b>Hello, Stanley Jones</b></p>
-                            <p class="text-muted">Thanks a lot because you keep purchasing our products. Our company
-                                promises to provide high quality products for you as well as outstanding
-                                customer service for every transaction. </p>
+                            <p><b>Hello, {{$facture->client->vis_a_vis}}</b></p>
+                            <p class="text-muted">{{$facture->objet}}</p>
                         </div>
 
                     </div><!-- end col -->
                     <div class="col-md-4 offset-md-2">
                         <div class="mt-3 float-right">
-                            <p class="m-b-10"><strong>Order Date : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp;&nbsp; Jan 17, 2016</span></p>
-                            <p class="m-b-10"><strong>Order Status : </strong> <span class="float-right"><span class="badge badge-danger">Unpaid</span></span></p>
-                            <p class="m-b-10"><strong>Order No. : </strong> <span class="float-right">000028 </span></p>
+                            <p class="m-b-10"><strong>Order Date : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp;&nbsp; {{date('F m Y',strtotime($facture->created_at))}}</span></p>
+                            <p class="m-b-10"><strong>Order No. : </strong> <span class="float-right">{{$facture->reference}} </span></p>
                         </div>
                     </div><!-- end col -->
                 </div>
                 <!-- end row -->
 
                 <div class="row mt-3">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <h6>Billing Address</h6>
                         <address>
-                            Stanley Jones<br>
-                            795 Folsom Ave, Suite 600<br>
-                            San Francisco, CA 94107<br>
-                            <abbr title="Phone">P:</abbr> (123) 456-7890
-                        </address>
-                    </div> <!-- end col -->
-
-                    <div class="col-sm-6">
-                        <h6>Shipping Address</h6>
-                        <address>
-                            Stanley Jones<br>
-                            795 Folsom Ave, Suite 600<br>
-                            San Francisco, CA 94107<br>
-                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                            {{$facture->client->adresse}}
                         </address>
                     </div> <!-- end col -->
                 </div>
@@ -103,34 +88,28 @@
                         <div class="table-responsive">
                             <table class="table mt-4 table-centered">
                                 <thead>
-                                <tr><th>#</th>
-                                    <th>Item</th>
-                                    <th style="width: 10%">Hours</th>
-                                    <th style="width: 10%">Hours Rate</th>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Service</th>
+                                    <th style="width: 10%">Unity</th>
+                                    <th style="width: 10%">Unity Rate</th>
                                     <th style="width: 10%" class="text-right">Total</th>
-                                </tr></thead>
+                                </tr>
+                                </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <b>Web Design</b> <br/>
-                                        2 Pages static website - my website
-                                    </td>
-                                    <td>22</td>
-                                    <td>$30</td>
-                                    <td class="text-right">$660.00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <b>Software Development</b> <br/>
-                                        Invoice editor software - AB'c Software
-                                    </td>
-                                    <td>112.5</td>
-                                    <td>$35</td>
-                                    <td class="text-right">$3937.50</td>
-                                </tr>
-
+                                @foreach($facture->getServices() as $service)
+                                    @php($subtotal = $subtotal + (floatval($service['price']) * intval($service['qty'])))
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            <b>{{$service['title']}}</b> <br/>
+                                            {{$service['desc']}}
+                                        </td>
+                                        <td>{{$service['qty']}} {{$service['unity']}}</td>
+                                        <td>${{floatval($service['price'])}}</td>
+                                        <td class="text-right">${{(floatval($service['price']) * intval($service['qty']))}}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div> <!-- end table-responsive -->
@@ -153,10 +132,12 @@
                         </div>
                     </div> <!-- end col -->
                     <div class="col-sm-6">
+
+                        @php($tax = $subtotal * 0.18)
                         <div class="float-right">
-                            <p><b>Sub-total:</b> <span class="float-right">$4597.50</span></p>
-                            <p><b>Discount (10%):</b> <span class="float-right"> &nbsp;&nbsp;&nbsp; $459.75</span></p>
-                            <h3>$4137.75 USD</h3>
+                            <p><b>Sub-total:</b> <span class="float-right">${{number_format($subtotal,2)}}</span></p>
+                            <p><b>Tax (18%):</b> <span class="float-right"> &nbsp;&nbsp;&nbsp; ${{number_format($tax,2)}}</span></p>
+                            <h3>${{number_format($tax + $subtotal,2)}} TND</h3>
                         </div>
                         <div class="clearfix"></div>
                     </div> <!-- end col -->
@@ -166,7 +147,7 @@
                 <div class="mt-4 mb-1">
                     <div class="text-right d-print-none">
                         <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Print</a>
-                        <a href="#" class="btn btn-info waves-effect waves-light">Submit</a>
+                        <a href="{{route('factures.index')}}" class="btn btn-info waves-effect waves-light">Go Back To Invoices</a>
                     </div>
                 </div>
             </div> <!-- end card-box -->

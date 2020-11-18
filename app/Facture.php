@@ -19,5 +19,9 @@ class Facture extends Model
     public function initiator() {
  	    return $this->belongsTo('App\User','user_id');
     }
+
+    public function getServices() {
+        return json_decode($this->body, true);
+    }
  }
 

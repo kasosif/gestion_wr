@@ -21,17 +21,18 @@ class ContratController extends Controller
 
 
     public function create()
-    { $clients=Client::all();
+    {
+        $clients=Client::all();
         $employes = User::where('role','employe')->get();
-            $type_services=TypeService::all();
+        $type_services=TypeService::all();
         return view('contrats.add',compact('clients','employes','type_services'));
     }
 
 
     public function store(ContratRequest $request)
     {
-       Contrat::create($request->all());
-         return redirect()->route('contrats.index')->with('success','Contract added ');
+        Contrat::create($request->all());
+        return redirect()->route('contrats.index')->with('success','Contract added ');
     }
 
 
@@ -41,7 +42,7 @@ class ContratController extends Controller
         $clients=Client::all();
         $employes = User::where('role','employe')->get();
         $type_services=TypeService::all();
-        return view('contrats.edit', compact(['contrat','clients'=>$clients,'employes'=>$employes,'type_services'=>$type_services]));
+        return view('contrats.edit', ['contrat' => $contrat,'clients'=>$clients,'employes'=>$employes,'type_services'=>$type_services]);
     }
 
 
@@ -56,9 +57,9 @@ class ContratController extends Controller
 
     public function destroy($id)
     {
-        $employe = Contrat::find($id);
+        $contrat = Contrat::find($id);
 
-        $employe->delete();
+        $contrat->delete();
         return redirect()->route('contrats.index')->with('success','Contract Deleted');
     }
 }

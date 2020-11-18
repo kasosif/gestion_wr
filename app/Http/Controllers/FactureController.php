@@ -14,8 +14,6 @@ class FactureController extends Controller
 {
     public function index()
     {
-
-
         $factures = Facture::paginate(5);
 
         return view('factures.index', ['factures' => $factures]);
@@ -33,7 +31,7 @@ class FactureController extends Controller
     {
         $request->validate([
             'client_id'=>'required|numeric',
-            'contract_id'=>'nullable|numeric',
+            'contrat_id'=>'nullable|numeric',
             'objet' => 'required',
             "services"    => "required|array|min:1",
             'services.*.title' => 'required|string',
@@ -43,6 +41,7 @@ class FactureController extends Controller
         ]);
 
         $facture = new Facture($request->except('services'));
+        $facture->reference = $id = hexdec( uniqid() );
         $facture->user_id = Auth::id();
         $facture->body = json_encode($request->services,JSON_UNESCAPED_SLASHES);
         $facture->save();
@@ -53,29 +52,8 @@ class FactureController extends Controller
 
     public function show($id)
     {
-        $facture=Facture::find($id);
+        $facture= Facture::find($id);
         return view('factures.details', compact('facture'));
-    }
-
-
-    public function edit($id)
-    {        $facture=Facture::find($id);
-        $clients=Client::all();
-
-        return view('factures.edit', compact('facture','clients'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'objet' => 'required',
-
-        ]);
-        $facture=Facture::find($id);
-        $facture->objet=$request->objet;
-        $facture->save();
-        return redirect()->route('factures.index')
-            ->with('success', 'Facture modifiée avec succès');
     }
 
     public function destroy($id)

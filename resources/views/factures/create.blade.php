@@ -53,8 +53,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="contract_id">Contract </label>
-                                        <select class="form-control" name="contract_id" id="contract_id">
+                                        <label for="contracts">Contract </label>
+                                        <select class="form-control" name="contrat_id" id="contracts">
                                             <option value="" disabled selected>Choose Client First</option>
                                         </select>
                                     </div>
@@ -193,6 +193,7 @@
                     url: '{{route('ajax.contracts')}}' + '/' + $(this).val(),
                     method: 'GET',
                     success: function (res) {
+                        console.log(res);
                         $('#contracts').html('<option value="" selected disabled>Choose The Contract</option>\n');
                         $.each(res.contracts, function (i,contract) {
                             $('#contracts').append(`<option value="${contract.id}">${contract.date_debut} => ${contract.date_fin} </option>`);

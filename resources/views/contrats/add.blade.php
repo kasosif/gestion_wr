@@ -45,7 +45,7 @@
                             <select class="form-control select2" name="employe_id" id="product-category">
                                 <option>Select</option>
                                 @foreach($employes as $employe)
-                                    <option  value="{{$employe->id}}">{{$employe->nom}}</option>
+                                    <option  value="{{$employe->id}}">{{$employe->fullName()}}</option>
                                 @endforeach
 
                             </select>

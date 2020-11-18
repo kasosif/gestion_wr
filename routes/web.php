@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/contrats', 'ContratController@index')->name('contrats.index');
     Route::get('/contrat/ajout', 'ContratController@create')->name('contrat.create');
     Route::post('/contrat/store', 'ContratController@store')->name('contrat.store');
-    Route::delete('/contrat/destroy/{id}', 'ContratController@destroy')->name('contrat.destroy');
+    Route::delete('/contrat/destroy/{id?}', 'ContratController@destroy')->name('contrat.destroy');
     Route::get('/contrat/edit/{id}', 'ContratController@edit')->name('contrat.edit');
     Route::put('/contrat/update/{id}', 'ContratController@update')->name('contrat.update');
 

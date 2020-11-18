@@ -17,6 +17,7 @@ class CreateFacturesTable extends Migration
             $table->bigIncrements('id');
             $table->text('objet');
             $table->longText('body');
+            $table->string('reference');
             $table->bigInteger('contrat_id')->unsigned()->nullable();
             $table->foreign('contrat_id')->references('id')->on('contrats');
             $table->bigInteger('client_id')->unsigned();

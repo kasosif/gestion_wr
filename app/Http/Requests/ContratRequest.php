@@ -25,7 +25,7 @@ class ContratRequest extends FormRequest
     public function rules()
     {
         return [
-            'date_debut'=>'required|date|before_or_equal:today' ,
+            'date_debut'=>'required|date' ,
             'date_fin'=> 'required|date|after:date_debut',
             'montant'=>'required|numeric|min:1' ,
             'modalite_paiement'=>['required','regex:(monthly|weekly|per year|per project)'],
