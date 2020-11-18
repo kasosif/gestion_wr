@@ -14,4 +14,8 @@ class Client extends Model
 	public function contrat () {
 		return $this->hasOne('App\Contrat');
 	}
+
+    public function creator() {
+        return $this->belongsTo('App\User','user_id');
+    }
 }

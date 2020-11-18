@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class ContratRequest extends FormRequest
@@ -32,7 +33,7 @@ class ContratRequest extends FormRequest
             'type_paiement'=> ['required','regex:(check|cash)'],
             'type_service_id'=> 'required|numeric',
             'client_id'=> 'required|numeric',
-            'employe_id'=> 'required|numeric',
+            'employe_id'=> Auth::user()->role == 'admin' ?  'required|numeric' : 'nullable',
             'etat'=> ['required','regex:(Active|Renewed|Stopped)'],
 
 

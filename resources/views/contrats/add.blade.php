@@ -38,31 +38,45 @@
                 <div class="card-box">
                 <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">Parties</h5>
                 <div class="row">
+                    @if(Auth::user()->role == 'admin')
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="product-category">Employee <span class="text-danger">*</span></label>
+                                <select class="form-control select2" name="employe_id" id="product-category">
+                                    <option>Select</option>
+                                    @foreach($employes as $employe)
+                                        <option  value="{{$employe->id}}">{{$employe->fullName()}}</option>
+                                    @endforeach
 
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label for="product-category">Employee <span class="text-danger">*</span></label>
-                            <select class="form-control select2" name="employe_id" id="product-category">
-                                <option>Select</option>
-                                @foreach($employes as $employe)
-                                    <option  value="{{$employe->id}}">{{$employe->fullName()}}</option>
-                                @endforeach
-
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label for="product-category">Client <span class="text-danger">*</span></label>
-                            <select class="form-control select2" name="client_id" id="product-category">
-                                <option>Select</option>
-                                @foreach($clients as $client)
-                                    <option  value="{{$client->id}}">{{$client->nom}}</option>
-                                @endforeach
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="product-category">Client <span class="text-danger">*</span></label>
+                                <select class="form-control select2" name="client_id" id="product-category">
+                                    <option>Select</option>
+                                    @foreach($clients as $client)
+                                        <option  value="{{$client->id}}">{{$client->nom}}</option>
+                                    @endforeach
 
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <label for="product-category">Client <span class="text-danger">*</span></label>
+                                <select class="form-control select2" name="client_id" id="product-category">
+                                    <option>Select</option>
+                                    @foreach($clients as $client)
+                                        <option  value="{{$client->id}}">{{$client->nom}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">Pricing</h5>
 

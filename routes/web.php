@@ -22,6 +22,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/employes/edit/{id}', 'EmployeeController@edit')->name('employe.edit');
     Route::put('/employes/update/{id}', 'EmployeeController@update')->name('employe.update');
 
+    Route::get('/profile', 'ProfileController@profile')->name('profile');
+    Route::put('/profile/changepassword', 'ProfileController@changepassword')->name('profile.changepassword');
+    Route::put('/profile/update', 'ProfileController@updateprofile')->name('profile.update');
+    Route::patch('/profile/updatepicture', 'ProfileController@updateprofilepicture')->name('profile.changepicture');
+
+
     Route::get('/clients', 'ClientController@index')->name('clients.index');
     Route::get('/clients/ajout', 'ClientController@create')->name('clients.ajout');
     Route::post('/clients/store', 'ClientController@store')->name('clients.store');

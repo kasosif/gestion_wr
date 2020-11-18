@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Http\Requests\ClientRequest;
+use App\Notifications\ClientAdded;
+use App\Notifications\InvoiceAdded;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::orderBy('created_at','desc')->paginate(10);
+        $logged = Auth::user();
+        if ($logged->role == 'admin') {
+            $clients = Client::orderBy('created_at', 'desc')->paginate(10);
+        } else {
+            $clients = Client::where('user_id',$logged->id)->orderBy('created_at', 'desc')->paginate(10);
+        }
         return view('clients.index',['clients'=>$clients]);
     }
 
@@ -33,14 +42,18 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        $params = [];
+        $logged = Auth::user();
+        $params = ['user_id' => $logged->id];
         if ($image = $request->files->get('avatar')) {
             $destinationPath = 'assets/images/users/'; // upload path
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $params['avatar'] = $profileImage;
         }
-        Client::create(array_merge($request->all(),$params));
+        $client = Client::create(array_merge($request->all(),$params));
+        if ($logged->role != 'admin') {
+            User::where('role','admin')->first()->notify(new ClientAdded($client, $logged));
+        }
         return redirect()->route('clients.index')->with('success','Client added ');
     }
 

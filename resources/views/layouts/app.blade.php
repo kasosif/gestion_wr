@@ -52,58 +52,54 @@
                     </a>
                 </li>
                 <li class="dropdown notification-list topbar-dropdown">
+
                     <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="fe-bell noti-icon"></i>
-                        <span class="badge badge-danger rounded-circle noti-icon-badge">2</span>
+                        @if(auth()->user()->unreadNotifications->count())
+                            <span class="badge badge-danger rounded-circle noti-icon-badge">{{auth()->user()->unreadNotifications->count()}}</span>
+                        @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
                         <!-- item-->
                         <div class="dropdown-item noti-title">
                             <h5 class="m-0">
-                                        <span class="float-right">
-                                            <a href="" class="text-dark">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </span>Notifications
+                                <span class="float-right">
+                                    @if(auth()->user()->unreadNotifications->count())
+                                        <a href="" class="text-dark">
+                                        <small>Clear All</small>
+                                    </a>
+                                    @endif
+                                </span>Notifications
                             </h5>
                         </div>
 
                         <div class="noti-scroll" data-simplebar>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item active">
-                                <div class="notify-icon">
-                                    <img src="{{asset('assets/images/users/anouar.jpg') }}" class="img-fluid rounded-circle" alt="" /> </div>
-                                <p class="notify-details">Anouar Khemeja</p>
-                                <p class="text-muted mb-0 user-msg">
-                                    <small>Anouar has created a new Invoice</small>
-                                </p>
-                            </a>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item active">
-                                <div class="notify-icon">
-                                    <img src="{{asset('assets/images/users/sarra.jpg') }}" class="img-fluid rounded-circle" alt="" /> </div>
-                                <p class="notify-details">Sarah Jenane</p>
-                                <p class="text-muted mb-0 user-msg">
-                                    <small>Sarra Renewed "Delice corp" Contract</small>
-                                </p>
-                            </a>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <div class="notify-icon">
-                                    <img src="{{asset('assets/images/users/abir.jpg') }}" class="img-fluid rounded-circle" alt="" /> </div>
-                                <p class="notify-details">Abir Cherif</p>
-                                <p class="text-muted mb-0 user-msg">
-                                    <small>Abir Added new tasks</small>
-                                </p>
-                            </a>
+                        @if(auth()->user()->unreadNotifications->count())
+                            @if(Auth::user()->role == 'admin')
+                                @foreach(auth()->user()->unreadNotifications as $notification)
+                                    <!-- item-->
+                                        <a href="{{$notification->data['link']}}" class="dropdown-item notify-item active">
+                                            <div class="notify-icon">
+                                                <img src="{{asset('assets/images/users/'.$notification->data['employe']['avatar']) }}" class="img-fluid rounded-circle" alt="" /> </div>
+                                            <p class="notify-details">{{$notification->data['employe']['prenom']}} {{$notification->data['employe']['nom']}} </p>
+                                            <p class="text-muted mb-0 user-msg">
+                                                <small>{{$notification->data['message']}}</small>
+                                            </p>
+                                        </a>
+                                    @endforeach
+                                @endif
+                            @else
+                                <p style="padding:23px !important;">No New Notifications</p>
+                            @endif
                         </div>
 
+                    @if(auth()->user()->notifications->count())
                         <!-- All-->
-                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                            View all
-                            <i class="fe-arrow-right"></i>
-                        </a>
+                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                View all
+                                <i class="fe-arrow-right"></i>
+                            </a>
+                        @endif
 
                     </div>
                 </li>
@@ -118,7 +114,7 @@
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{route('profile')}}" class="dropdown-item notify-item">
                             <i class="fe-user"></i>
                             <span>My Account</span>
                         </a>
@@ -204,7 +200,7 @@
                     <div class="dropdown-menu user-pro-dropdown">
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{route('profile')}}" class="dropdown-item notify-item">
                             <i class="fe-user mr-1"></i>
                             <span>My Account</span>
                         </a>
