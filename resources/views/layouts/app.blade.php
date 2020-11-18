@@ -288,8 +288,8 @@
                         <div class="collapse  @yield('show_contracts_coolapse') " id="sidebarContract">
                             <ul class="nav-second-level">
                                 <li>
-                                    <a @yield('active_contracts_list') href="#">Contracts List</a>
-                                    <a @yield('active_contracts_add')  href="#">New Contract</a>
+                                    <a @yield('active_contracts_list') href="{{route('contrats.index')}}">Contracts List</a>
+                                    <a @yield('active_contracts_add')  href="{{route('contrat.create')}}">New Contract</a>
                                 </li>
                             </ul>
                         </div>

@@ -19,6 +19,9 @@ class CreateContratsTable extends Migration
             $table->date('date_fin');
             $table->double('montant');
             $table->string('modalite_paiement');
+            $table->text('client_description');
+            $table->text('employe_description');
+            $table->string('etat');
             $table->string('type_paiement');
             $table->unsignedBigInteger('type_service_id');
             $table->foreign('type_service_id')->references('id')->on('type_services');
@@ -26,7 +29,7 @@ class CreateContratsTable extends Migration
             $table->foreign('client_id')->references('id')->on('clients');
             $table->unsignedBigInteger('employe_id');
             $table->foreign('employe_id')->references('id')->on('users');
-            
+
 
             $table->timestamps();
         });
