@@ -33,6 +33,7 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
+        $params = [];
         if ($image = $request->files->get('avatar')) {
             $destinationPath = 'assets/images/users/'; // upload path
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -65,6 +66,7 @@ class ClientController extends Controller
     public function update(ClientRequest $request, $id)
     {
         $client = Client::find($id);
+        $params = [];
         if ($image = $request->files->get('avatar')) {
             $destinationPath = 'assets/images/users/'; // upload path
             if ($client->avatar && file_exists(public_path().'/assets/images/users/'.$client->avatar)) {

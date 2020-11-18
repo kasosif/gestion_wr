@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <a href="{{route('contrat.create')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Employee</a>
+                            <a href="{{route('contrat.create')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Contract</a>
                         </div>
 
                     </div>
@@ -55,8 +55,8 @@
                             <tbody>
                             @foreach($contrats as $contrat)
                                 <tr>
-                                    <td>{{date('F m Y',strtotime($contrat->date_debut))}}</td>
-                                    <td>{{date('F m Y',strtotime($contrat->date_fin))}}</td>
+                                    <td>{{date('F d Y',strtotime($contrat->date_debut))}}</td>
+                                    <td>{{date('F d Y',strtotime($contrat->date_fin))}}</td>
                                     <td class="table-user">
                                         <img src="{{asset('assets/images/users/'.$contrat->client->avatar)}}" alt="table-user" class="mr-2 ">
                                         <a href="javascript:void(0);" class="text-body font-weight-semibold">{{$contrat->client->nom}}</a>

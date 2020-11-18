@@ -59,7 +59,7 @@
                                         <span class="text-body font-weight-semibold">{{$facture->client->nom}}</span>
                                     </td>
                                     <td>
-                                        {{date('F m Y',strtotime($facture->created_at))}}
+                                        {{date('F d Y',strtotime($facture->created_at))}}
                                     </td>
                                     <td>
                                         {{$facture->objet}}

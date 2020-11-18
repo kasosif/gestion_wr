@@ -44,12 +44,6 @@
                         <table class="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
                             <thead>
                             <tr>
-                                <th style="width: 20px;">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">&nbsp;</label>
-                                    </div>
-                                </th>
                                 <th>Full Name</th>
                                 <th>Job Title</th>
                                 <th>Phone</th>
@@ -61,12 +55,6 @@
                             <tbody>
                             @foreach($employes as $employe)
                                 <tr>
-                                    <td>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                            <label class="custom-control-label" for="customCheck2">Select</label>
-                                        </div>
-                                    </td>
                                     <td class="table-user">
                                         <img src="{{asset('assets/images/users/'.$employe->avatar)}}" alt="table-user" class="mr-2 rounded-circle">
                                         <a href="javascript:void(0);" class="text-body font-weight-semibold">{{$employe->fullName()}}</a>
@@ -74,7 +62,7 @@
                                     <td>{{$employe->humanRole()}}</td>
                                     <td>{{$employe->telephone}}</td>
                                     <td>
-                                        {{date('F m Y',strtotime($employe->date_embauche))}}
+                                        {{date('F d Y',strtotime($employe->date_embauche))}}
                                     </td>
                                     <td>
                                         @if($employe->is_valid)

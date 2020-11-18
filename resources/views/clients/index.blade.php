@@ -43,12 +43,6 @@
                         <table class="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
                             <thead>
                             <tr>
-                                <th style="width: 20px;">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">&nbsp;</label>
-                                    </div>
-                                </th>
                                 <th>Client Name</th>
                                 <th>Last Contract at</th>
                                 <th>Phone</th>
@@ -60,20 +54,14 @@
                             <tbody>
                             @foreach($clients as $client)
                                 <tr>
-                                    <td>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                            <label class="custom-control-label" for="customCheck2">Select</label>
-                                        </div>
-                                    </td>
                                     <td class="table-user">
-                                        <img style="max-width: 70px" src="{{asset('assets/images/users/'.$client->avatar)}}" alt="table-user" class="mr-2">
+                                    <img style="max-width: 70px" src="{{asset('assets/images/users/'.$client->avatar)}}" alt="table-user" class="mr-2">
                                         <a href="javascript:void(0);" class="text-body font-weight-semibold">{{$client->nom}}</a>
                                     </td>
                                     <td> Mars 05 2019</td>
                                     <td>{{$client->telephone}}</td>
                                     <td>
-                                        {{date('F m Y',strtotime($client->created_at))}}
+                                        {{date('F d Y',strtotime($client->created_at))}}
                                     </td>
                                     <td>
                                         @if($client->etat == 'Prospect')

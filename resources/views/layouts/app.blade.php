@@ -19,6 +19,9 @@
 
     <!-- icons -->
     <link href="{{asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/iziToast/iziToast.min.css')}}">
+
     @yield('css')
 </head>
 
@@ -357,6 +360,48 @@
 <!-- App js -->
 <script src="{{asset('assets/js/app.min.js')}}"></script>
 
+<script src="{{asset('assets/libs/iziToast/iziToast.min.js')}}" type="text/javascript"></script>
+
+<!-- Errors & Messages -->
+<script>
+    @if($errors->all())
+    @foreach($errors->all() as $message)
+    iziToast.error({
+        title: 'Erreur',
+        message: '{{ $message }}',
+        position: 'bottomRight'
+    });
+    @endforeach
+
+    @elseif(session()->has('message'))
+    iziToast.success({
+        title: 'Succès',
+        message: '{{ session()->get('message') }}',
+        position: 'topRight'
+    });
+
+    @elseif(session()->has('error'))
+    iziToast.error({
+        title: 'Erreur',
+        message: '{{ session()->get('error') }}',
+        position: 'bottomRight'
+    });
+    @endif
+    @if (session('status'))
+    iziToast.success({
+        title: 'Succès',
+        message: '{{ session('status') }}',
+        position: 'topRight'
+    });
+    @endif
+    @if (session('success'))
+    iziToast.success({
+        title: 'Succès',
+        message: '{{ session('success') }}',
+        position: 'topRight'
+    });
+    @endif
+</script>
 @yield('js')
 
 </body>

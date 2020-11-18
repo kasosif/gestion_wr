@@ -66,7 +66,7 @@
                     </div><!-- end col -->
                     <div class="col-md-4 offset-md-2">
                         <div class="mt-3 float-right">
-                            <p class="m-b-10"><strong>Order Date : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp;&nbsp; {{date('F m Y',strtotime($facture->created_at))}}</span></p>
+                            <p class="m-b-10"><strong>Order Date : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp;&nbsp; {{date('F d Y',strtotime($facture->created_at))}}</span></p>
                             <p class="m-b-10"><strong>Order No. : </strong> <span class="float-right">{{$facture->reference}} </span></p>
                         </div>
                     </div><!-- end col -->
@@ -133,10 +133,10 @@
                     </div> <!-- end col -->
                     <div class="col-sm-6">
 
-                        @php($tax = $subtotal * 0.18)
+                        @php($tax = $subtotal * 0.19)
                         <div class="float-right">
                             <p><b>Sub-total:</b> <span class="float-right">${{number_format($subtotal,2)}}</span></p>
-                            <p><b>Tax (18%):</b> <span class="float-right"> &nbsp;&nbsp;&nbsp; ${{number_format($tax,2)}}</span></p>
+                            <p><b>Tax (19%):</b> <span class="float-right"> &nbsp;&nbsp;&nbsp; ${{number_format($tax,2)}}</span></p>
                             <h3>${{number_format($tax + $subtotal,2)}} TND</h3>
                         </div>
                         <div class="clearfix"></div>

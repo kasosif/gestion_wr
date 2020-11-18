@@ -24,11 +24,11 @@ class CreateContratsTable extends Migration
             $table->string('etat');
             $table->string('type_paiement');
             $table->unsignedBigInteger('type_service_id');
-            $table->foreign('type_service_id')->references('id')->on('type_services');
+            $table->foreign('type_service_id')->references('id')->on('type_services')->onDelete('cascade');
             $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->unsignedBigInteger('employe_id');
-            $table->foreign('employe_id')->references('id')->on('users');
+            $table->foreign('employe_id')->references('id')->on('users')->onDelete('cascade');
 
 
             $table->timestamps();

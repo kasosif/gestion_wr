@@ -70,24 +70,22 @@
                     <div class="form-group mb-3">
                         <label for="product-category">Job Title <span class="text-danger">*</span></label>
                         <select class="form-control select2" name="poste" id="product-category">
-                            <option>Select</option>
-                            <optgroup label="Shopping">
-                                <option selected value="SH1">Developer</option>
-                                <option value="SH2">Shopping 2</option>
-                                <option value="SH3">Shopping 3</option>
-                                <option value="SH4">Shopping 4</option>
+                            <option selected disabled value="">Choose Job Title</option>
+                            <optgroup label="IT">
+                                <option value="Full Stack Developer">Full Stack Developer</option>
+                                <option value="Web Developer">Web Developer</option>
+                                <option value="Designer">Designer</option>
+                                <option value="CTO">CTO</option>
                             </optgroup>
-                            <optgroup label="CRM">
-                                <option value="CRM1">Crm 1</option>
-                                <option value="CRM2">Crm 2</option>
-                                <option value="CRM3">Crm 3</option>
-                                <option value="CRM4">Crm 4</option>
+                            <optgroup label="Segments">
+                                <option value="Brands Segment Manager">Brands Segment Manager</option>
+                                <option value="Academia Segment Manager">Academia Segment Manager</option>
+                                <option value="Brands Segment Employee">Brands Segment Employee</option>
+                                <option value="Academia Segment Employee">Academia Segment Employee</option>
                             </optgroup>
-                            <optgroup label="eCommerce">
-                                <option value="E1">eCommerce 1</option>
-                                <option value="E2">eCommerce 2</option>
-                                <option value="E3">eCommerce 3</option>
-                                <option value="E4">eCommerce 4</option>
+                            <optgroup label="Production">
+                                <option value="Chief Of Production">Chief Of Production</option>
+                                <option value="Commercial Representative">Commercial Representative</option>
                             </optgroup>
 
                         </select>
