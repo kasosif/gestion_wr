@@ -35,15 +35,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <a href="javascript:void(0);" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Employee</a>
+                            <a href="{{route('employe.ajout')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Employee</a>
                         </div>
-                        <div class="col-sm-8">
-                            <div class="text-sm-right">
-                                <button type="button" class="btn btn-success mb-2 mr-1"><i class="mdi mdi-cog"></i></button>
-                                <button type="button" class="btn btn-light mb-2 mr-1">Import</button>
-                                <button type="button" class="btn btn-light mb-2">Export</button>
-                            </div>
-                        </div><!-- end col-->
+
                     </div>
 
                     <div class="table-responsive">
@@ -65,81 +59,37 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Select</label>
-                                    </div>
-                                </td>
-                                <td class="table-user">
-                                    <img src="{{asset('assets/images/users/anouar.jpg')}}" alt="table-user" class="mr-2 rounded-circle">
-                                    <a href="javascript:void(0);" class="text-body font-weight-semibold">Anouar Khemeja</a>
-                                </td>
-                                <td>CTO</td>
-                                <td>53 214 689</td>
-                                <td>
-                                    August 05 2010
-                                </td>
-                                <td>
-                                    <span class="badge badge-soft-success">Active</span>
-                                </td>
+                            @foreach($employes as $employe)
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                            <label class="custom-control-label" for="customCheck2">Select</label>
+                                        </div>
+                                    </td>
+                                    <td class="table-user">
+                                        <img src="{{asset('assets/images/users/'.$employe->avatar)}}" alt="table-user" class="mr-2 rounded-circle">
+                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">{{$employe->fullName()}}</a>
+                                    </td>
+                                    <td>{{$employe->humanRole()}}</td>
+                                    <td>{{$employe->telephone}}</td>
+                                    <td>
+                                        {{date('F m Y',strtotime($employe->date_embauche))}}
+                                    </td>
+                                    <td>
+                                        @if($employe->is_valid)
+                                            <span class="badge badge-soft-success">Active</span>
+                                        @else
+                                            <span class="badge badge-soft-danger">Blocked</span>
+                                        @endif
+                                    </td>
 
-                                <td>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Select</label>
-                                    </div>
-                                </td>
-                                <td class="table-user">
-                                    <img src="{{asset('assets/images/users/sarra.jpg')}}" alt="table-user" class="mr-2 rounded-circle">
-                                    <a href="javascript:void(0);" class="text-body font-weight-semibold">Sarah Jenane</a>
-                                </td>
-                                <td>Segment Manager</td>
-                                <td>54 254 298</td>
-                                <td>
-                                    December 12 2018
-                                </td>
-                                <td>
-                                    <span class="badge badge-soft-success">Active</span>
-                                </td>
-
-                                <td>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Select</label>
-                                    </div>
-                                </td>
-                                <td class="table-user">
-                                    <img src="{{asset('assets/images/users/abir.jpg')}}" alt="table-user" class="mr-2 rounded-circle">
-                                    <a href="javascript:void(0);" class="text-body font-weight-semibold">Abir Chérif</a>
-                                </td>
-                                <td>CEO</td>
-                                <td>22 689 572</td>
-                                <td>
-                                    January 05 2015
-                                </td>
-                                <td>
-                                    <span class="badge badge-soft-success">Active</span>
-                                </td>
-
-                                <td>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <a href="{{route('employe.edit',$employe->id)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                        <a href="#" onclick="displayDeleteModal('{{$employe->id}}', '{{$employe->fullName()}}')" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -147,6 +97,35 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+    <div id="top-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-top">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="topModalLabel">Delete Employe Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div id="top-modal-body" class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <form method="POST" id="top-modal-form" action="">
+                        @csrf @method('delete')
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
-@section('js')@endsection
+@section('js')
+    <script>
+        function displayDeleteModal(id,name) {
+            $('#top-modal-body').html('Are you sure to delete employe: '+name);
+            $('#top-modal-form').attr('action','{{route('employe.destroy')}}/'+id);
+            $('#top-modal').modal('show');
+        }
+    </script>
+
+@endsection
 
