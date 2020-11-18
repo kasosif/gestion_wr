@@ -227,7 +227,7 @@
                     <li class="menu-title">Navigation</li>
 
                     <li>
-                        <a href="{{route('home')}}" data-toggle="collapse"  @yield('active_dashboard') >
+                        <a href="{{route('home')}}"  @yield('active_dashboard') >
                             <i data-feather="airplay"></i>
                             <span> Dashboard </span>
                         </a>
