@@ -202,7 +202,6 @@
                 'showUpload': !1,
                 'allowedFileExtensions': ["jpeg","jpg", "png"],
                 'showCaption':!1,
-                'minFileSize': 5,
                 'maxFileSize': 2200
             });
 
