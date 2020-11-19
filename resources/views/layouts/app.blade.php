@@ -56,7 +56,7 @@
                     <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="fe-bell noti-icon"></i>
                         @if(auth()->user()->unreadNotifications->count())
-                            <span class="badge badge-danger rounded-circle noti-icon-badge">{{auth()->user()->unreadNotifications->count()}}</span>
+                            <span class="thereis_notifications badge badge-danger rounded-circle noti-icon-badge">{{auth()->user()->unreadNotifications->count()}}</span>
                         @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-lg">
@@ -92,14 +92,6 @@
                                 <p style="padding:23px !important;">No New Notifications</p>
                             @endif
                         </div>
-
-                    @if(auth()->user()->notifications->count())
-                        <!-- All-->
-                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                View all
-                                <i class="fe-arrow-right"></i>
-                            </a>
-                        @endif
 
                     </div>
                 </li>
@@ -397,6 +389,18 @@
         position: 'topRight'
     });
     @endif
+    $('body').on('click','.notification-list', function () {
+        $.ajax({
+            url: '{{route('ajax.read_all_notifs')}}',
+            method:'POST',
+            data: {_token: '{{csrf_token()}}'
+            },
+            success: function () {
+                // $('.noti-scroll').html('<p style="padding:23px !important;">No New Notifications</p>');
+                $('.thereis_notifications').remove();
+            }
+        })
+    });
 </script>
 @yield('js')
 

@@ -52,5 +52,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/contrat/update/{id}', 'ContratController@update')->name('contrat.update');
 
     Route::get('/ajax/contracts/{client_id?}','AjaxController@contracts')->name('ajax.contracts');
+    Route::post('/ajax/read_notifs','AjaxController@readAll')->name('ajax.read_all_notifs');
 
 });

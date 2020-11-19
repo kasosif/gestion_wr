@@ -23,4 +23,10 @@ class AjaxController extends Controller
         return response()->json(['success' => true,'contracts' => $contracts]);
 
     }
+
+    public function readAll() {
+        $logged = Auth::user();
+        $logged->notifications->markAsRead();
+        return response()->json(['success' => true]);
+    }
 }
