@@ -35,6 +35,7 @@
         <div class="col-lg-12">
             <form method="POST" action="{{ route('contrat.update',$contrat->id) }}">
                 @csrf
+                @method('put')
 
                 <div class="card-box">
                     <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">Parties</h5>
